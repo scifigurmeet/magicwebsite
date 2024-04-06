@@ -29,6 +29,7 @@ try:
 except Exception as e:
     # If the element is not found, print failure message
     print("Test Failed:", e)
+    raise e
 finally:
     # Close the WebDriver
     driver.quit()
