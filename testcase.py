@@ -8,8 +8,7 @@ from selenium.webdriver.chrome.service import Service
 URL = 'https://scifigurmeet.github.io/magicwebsite/'
 
 # Initialize Chrome WebDriver
-service = Service(
-    executable_path='C:/Users/scifi/OneDrive/Desktop/chromedriver.exe')
+service = Service(executable_path='/usr/local/bin/')
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
 options.add_argument('--no-sandbox')
