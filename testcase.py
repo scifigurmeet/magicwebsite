@@ -2,12 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 
 # URL of your webpage
 URL = 'https://scifigurmeet.github.io/magicwebsite/'
 
 # Initialize Chrome WebDriver
-driver = webdriver.Chrome()
+service = Service(
+    executable_path='C:/Users/scifi/OneDrive/Desktop/chromedriver.exe')
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
+options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(service=service, options=options)
 
 try:
     # Open the webpage
