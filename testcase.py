@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
-import string
-import random
 
 # Start the WebDriver and open the HTML page
 service = Service(executable_path='/usr/local/bin/chromedriver')
@@ -14,7 +12,7 @@ options.add_argument('--no-sandbox')
 driver = webdriver.Chrome(service=service, options=options)
 
 # URL of your webpage
-URL = 'https://scifigurmeet.github.io/magicwebsite/?' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=1000000))
+URL = 'https://scifigurmeet.github.io/magicwebsite/'
 print(URL)
 
 try:
