@@ -15,6 +15,7 @@ driver = webdriver.Chrome(service=service, options=options)
 
 # URL of your webpage
 URL = 'https://scifigurmeet.github.io/magicwebsite/?' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=1000000))
+print(URL)
 
 try:
     # Open the webpage
