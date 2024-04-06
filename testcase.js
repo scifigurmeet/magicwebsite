@@ -10,7 +10,7 @@ const puppeteer = require("puppeteer");
   try {
     await page.goto(URL);
 
-    await page.waitForXPath("//h1[contains(., 'Gurmeet')]", { timeout: 10000 });
+    await page.waitForSelector('h1:contains("Gurmeet")', { timeout: 10000 });
 
     console.log("Test Passed: Found h1 tag containing 'Gurmeet'");
   } catch (error) {
