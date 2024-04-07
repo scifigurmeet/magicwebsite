@@ -1,19 +1,29 @@
-name: E2E on Chrome
-
-on: [push]
+name: example-basic
+# This workflow represents a set of basic End-to-End tests
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
+
+  basic-ubuntu-20:
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v3
+      - name: Cypress tests
+        # normally you would write
+        # uses: cypress-io/github-action@v6
+        uses: ./
+        # the parameters below are only necessary
+        # because we are running these examples in a monorepo
         with:
-          project: .
-          browser: chrome
-          build: yarn build
-          start: yarn start
-          wait-on: "http://localhost:3000"
+          working-directory: .
+          # just for full picture after installing Cypress
+          # print information about detected browsers, etc
+          # see https://on.cypress.io/command-line#cypress-info
+          build: npx cypress info
