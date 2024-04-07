@@ -22,6 +22,9 @@ jobs:
           npm install cypress
           npx cypress verify
 
+      - name: Create empty Cypress configuration file
+        run: touch cypress.json
+
       - name: Run Cypress tests
         run: |
           npx cypress run --headless --browser chrome --spec "*.cy.js"
