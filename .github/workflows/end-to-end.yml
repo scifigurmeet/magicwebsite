@@ -1,5 +1,4 @@
-name: example-basic
-# This workflow represents a set of basic End-to-End tests
+name: example-chrome
 on:
   push:
     branches:
@@ -9,21 +8,52 @@ on:
 
 jobs:
 
-  basic-ubuntu-20:
-    runs-on: ubuntu-20.04
+  tests:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress tests
-        # normally you would write
-        # uses: cypress-io/github-action@v6
+      - name: Chrome headless
         uses: ./
-        # the parameters below are only necessary
-        # because we are running these examples in a monorepo
         with:
-          working-directory: examples/basic
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
+          # Print information about the system and current environment
+          # including detected browsers
+          # which are pre-installed in GitHub-hosted runners
           # see https://on.cypress.io/command-line#cypress-info
+          # We do not need the build parameter to build an app here
+          # because the remote https://example.cypress.io site
+          # is already built and running, and so for convenience
+          # we repurpose the build parameter to get cypress info instead.
           build: npx cypress info
+          working-directory: examples/browser
+          browser: chrome
+          summary-title: 'Chrome headless'
+          # As of Cypress v8.0 the `cypress run` command
+          # executes tests in `headless` mode by default
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-headless-chrome
+          path: examples/browser/cypress/screenshots
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/browser
+
+      - name: Chrome headed
+        uses: ./
+        with:
+          # Cypress and dependencies are already installed
+          install: false
+          working-directory: examples/browser
+          browser: chrome
+          headed: true
+          summary-title: 'Chrome headed'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-headed-chrome
+          path: examples/browser/cypress/screenshots
+
+      - run: npx image-size cypress/screenshots/**/*.png
+        working-directory: examples/browser
