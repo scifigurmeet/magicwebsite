@@ -6,22 +6,14 @@ on:
       - main
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
+  basic-ubuntu-22:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Cypress tests
+        uses: ./
         with:
-          node-version: '20'
-
-      - name: Install Cypress
-        run: |
-          npm install cypress
-          npx cypress verify
-
-      - name: Run Cypress tests
-        run: |
-          npx cypress run --headless --browser chrome --spec "*.cy.js"
+          working-directory: examples/basic
+          build: npx cypress infoowser chrome --spec "*.cy.js"
