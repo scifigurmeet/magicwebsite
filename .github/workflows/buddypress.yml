@@ -40,7 +40,7 @@ jobs:
       - name: Install Chrome WebDriver
         run: |
           LATEST=$(wget -q -O - https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE)
-          wget https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.60/linux64/chromedriver-linux64.zip
+          wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6309.0/linux64/chromedriver-linux64.zip
           unzip chromedriver-linux64.zip
           cd chromedriver-linux64
           sudo mv chromedriver /usr/local/bin/
